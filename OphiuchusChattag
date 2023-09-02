@@ -1,21 +1,24 @@
 local textChatService = game:GetService("TextChatService")
 
-textChatService.OnIncomingMessage = function(message: TextChatMessage)
-	
-	local properties = Instance.new("TextChatMessageProperties")
-	
-	if message.TextSource then
-		
-		local player = game:GetService("Players"):GetPlayerByUserId(message.TextSource.UserId)
-		
-		if player.Name == "OphiuchusOwner" then
-			
-			properties.PrefixText = "<font color='#181a17'>[Ophiuchus Owner]</font> " .. message.PrefixText
-			
-		end
-		
-	end
-	
-	return properties
-
+local function CustomizeChatMessage(message)
+    local properties = Instance.new("TextChatMessageProperties")
+    
+    if message.TextSource then
+        local player = game:GetService("Players"):GetPlayerByUserId(message.TextSource.UserId)
+        
+        if player then
+            local isAdmin = player.Name == "OphiuchusOwner"
+            local isMember = player.Name == "Williamplaysroblox74" -- Add more usernames or roles as needed
+            
+            if isAdmin then
+                properties.PrefixText = "<font color='#181a17'>[Ophiuchus Owner]</font> " .. message.PrefixText
+            elseif isMember then
+                properties.PrefixText = "<font color='#0c5921'>[Ophiuchus User]</font> " .. message.PrefixText -- Customize member prefix color
+            end
+        end
+    end
+    
+    return properties
 end
+
+textChatService.OnIncomingMessage = CustomizeChatMessage
