@@ -8,7 +8,7 @@ local function CustomizeChatMessage(message)
         
         if player then
             local isAdmin = player.Name == "OphiuchusOwner"
-            local isMember = player.Name == "OphiuchusTester" -- Add more usernames or roles as needed
+            local isMember = player.Name == "dontliketables" -- Add more usernames or roles as needed
             
             if isAdmin then
                 properties.PrefixText = "<font color='#181a17'>[Ophiuchus Owner]</font> " .. message.PrefixText
